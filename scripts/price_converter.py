@@ -1,6 +1,10 @@
 from math import ceil
 
 
+def rate30002rate(rate3000: float) -> float:
+    return rate3000 / 3000
+
+
 def tael_given_point(point: int, price: int) -> str:
     """计算买point点卡点数需要多少银两（额外消耗三界功绩）
 

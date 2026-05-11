@@ -1,0 +1,1 @@
+curl "https://aimhxy.com/mhb/search?q=$server&flag=$flag"
