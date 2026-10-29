@@ -52,23 +52,23 @@ def get_gem_stamina(level: int) -> int:
     assert 1 < level < 21
     
     if level > 19:
-        return 2 * get_gem_stamina(19) + get_gem_stamina(17) + 2 * get_gem_stamina(18)
+        return 2 * get_gem_stamina(19) + get_gem_stamina(17) + 2 * get_gem_stamina(18) + 10 * (level - 1)
     if level > 18:
-        return 2 * get_gem_stamina(18) + get_gem_stamina(15) + get_gem_stamina(16) + get_gem_stamina(17)
+        return 2 * get_gem_stamina(18) + get_gem_stamina(15) + get_gem_stamina(16) + get_gem_stamina(17) + 10 * (level - 1)
     if level > 17:
-        return 2 * get_gem_stamina(17) + get_gem_stamina(13) + get_gem_stamina(14) + get_gem_stamina(16)
+        return 2 * get_gem_stamina(17) + get_gem_stamina(13) + get_gem_stamina(14) + get_gem_stamina(16) + 10 * (level - 1)
     if level > 16:
-        return 2 * get_gem_stamina(16) + get_gem_stamina(15)
+        return 2 * get_gem_stamina(16) + get_gem_stamina(15) + 10 * (level - 1)
     if level > 15:
-        return 2 * get_gem_stamina(15) + get_gem_stamina(11) + get_gem_stamina(12) + get_gem_stamina(13)
+        return 2 * get_gem_stamina(15) + get_gem_stamina(11) + get_gem_stamina(12) + get_gem_stamina(13) + 10 * (level - 1)
     if level > 14:
-        return 2 * get_gem_stamina(14) + get_gem_stamina(9) + get_gem_stamina(12)
+        return 2 * get_gem_stamina(14) + get_gem_stamina(9) + get_gem_stamina(12) + 10 * (level - 1)
     if level > 13:
-        return 2 * get_gem_stamina(13) + get_gem_stamina(9) + get_gem_stamina(10)
+        return 2 * get_gem_stamina(13) + get_gem_stamina(9) + get_gem_stamina(10) + 10 * (level - 1)
     if level > 12:
-        return 2 * get_gem_stamina(12) + get_gem_stamina(9)
+        return 2 * get_gem_stamina(12) + get_gem_stamina(9) + 10 * (level - 1)
     if level > 11:
-        return 2 * get_gem_stamina(11) + get_gem_stamina(3) + get_gem_stamina(5) + get_gem_stamina(6)
+        return 2 * get_gem_stamina(11) + get_gem_stamina(3) + get_gem_stamina(5) + get_gem_stamina(6) + 10 * (level - 1)
     
     stamina: int = 0
     for i in range(2, level + 1):
@@ -123,17 +123,16 @@ def get_star_stone_stamina(level: int) -> int:
     assert 1 < level < 12
     
     if level > 10:
-        return 3 * get_star_stone_stamina(10) + get_star_stone_stamina(9)
+        return 3 * get_star_stone_stamina(10) + get_star_stone_stamina(9) + 30 * level
     if level > 9:
-        return 3 * get_star_stone_stamina(9) + get_star_stone_stamina(6) + get_star_stone_stamina(7)
+        return 3 * get_star_stone_stamina(9) + get_star_stone_stamina(6) + get_star_stone_stamina(7) + 30 * level
     if level > 8:
-        return 3 * get_star_stone_stamina(8) + get_star_stone_stamina(5)
+        return 3 * get_star_stone_stamina(8) + get_star_stone_stamina(5) + 30 * level
     
     stamina: int = 0
     for i in range(2, level + 1):
         stamina += (30 + 30 * (i - 1)) * 3 ** (level - i)
     return stamina
-
 
 
 def get_spirit_dust_n(level: int) -> int:
@@ -175,9 +174,8 @@ def get_spirit_dust_stamina(level: int) -> int:
     """
     assert level > 1
     
-    stamina: int = 0
-    for i in range(2, level + 1):
-        stamina += (30 + 30 * (i - 1)) * 2 ** (level - i)
-    for i in range(2, level - 1):
-        stamina += (30 + 30 * (i - 1)) * 2 ** (level - 2 - i)
+    previous_stamina: int = 0
+    stamina: int = 60
+    for current_lv in range(3, level + 1):
+        previous_stamina, stamina = stamina, 2 * stamina + previous_stamina + 30 * current_lv
     return stamina
