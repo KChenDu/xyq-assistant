@@ -101,3 +101,37 @@ def expected_stones(suit_type: str, orb_lv: int, n_target: int = 1, current_coun
         raise ValueError
 
     return expected_orbs(suit_type, n_target, current_count) * stones_per_orb
+
+
+def expected_exp(suit_type: str, orb_lv: int, n_target: int = 1, current_count: int = 0) -> float:
+    """计算点到任一目标套装效果所需的人物经验期望消耗。
+
+    Args:
+        suit_type (str): 套装类型，可选“变身术”“法术追加”“附加状态”“变化咒”
+        orb_lv (int): 附魔宝珠等级，可选 80、100、110、120、130、140、150、160
+        n_target (int, optional): 不同目标套装数，范围 1-该类型套装总数，默认 1
+        current_count (int, optional): 当前已失败点化次数，范围 0-30
+
+    Returns:
+        float: 还需要消耗的人物经验期望值
+    """
+    if orb_lv == 80:
+        exp_per_orb = 178000
+    elif orb_lv == 100:
+        exp_per_orb = 300000
+    elif orb_lv == 110:
+        exp_per_orb = 382750
+    elif orb_lv == 120:
+        exp_per_orb = 482000
+    elif orb_lv == 130:
+        exp_per_orb = 599250
+    elif orb_lv == 140:
+        exp_per_orb = 736000
+    elif orb_lv == 150:
+        exp_per_orb = 893750
+    elif orb_lv == 160:
+        exp_per_orb = 1074000
+    else:
+        raise ValueError
+
+    return expected_orbs(suit_type, n_target, current_count) * exp_per_orb
