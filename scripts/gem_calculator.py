@@ -2,6 +2,14 @@ from math import sqrt
 
 
 def get_gem_n(level: int) -> int:
+    """获取1级宝石数量
+    
+    Args:
+        level (int): 宝石等级
+
+    Returns:
+        int: 1级宝石数量
+    """
     assert 0 < level < 21
     
     if level > 19:
